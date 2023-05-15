@@ -1,24 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using NewsUA.API.Data;
+using NewsUA.API.Interfaces;
+using NewsUA.API.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<DataContext>(opt => {
+    opt.UseSqlServer(@"Data Source=.\SQL2016;Initial Catalog=NewsDb;Trusted_Connection=True;TrustServerCertificate=True");
+});
+builder.Services.AddScoped<INewsRepository, NewsRepository>();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

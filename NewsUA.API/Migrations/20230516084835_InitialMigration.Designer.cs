@@ -12,7 +12,7 @@ using NewsUA.API.Data;
 namespace NewsUA.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230516082253_InitialMigration")]
+    [Migration("20230516084835_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -80,7 +80,7 @@ namespace NewsUA.API.Migrations
                             AuthorName = "Author name 1",
                             HotStatus = "Basic",
                             Information = "Information 1",
-                            PublishedAt = new DateTime(2023, 5, 16, 10, 22, 53, 78, DateTimeKind.Local).AddTicks(5848),
+                            PublishedAt = new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3632),
                             Status = "InProcess",
                             SubTitle = "SubTitle 1",
                             Title = "Title 1",
@@ -92,7 +92,7 @@ namespace NewsUA.API.Migrations
                             AuthorName = "Author name 2",
                             HotStatus = "Hot",
                             Information = "Information 2",
-                            PublishedAt = new DateTime(2023, 5, 16, 10, 22, 53, 78, DateTimeKind.Local).AddTicks(5917),
+                            PublishedAt = new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3694),
                             Status = "InProcess",
                             SubTitle = "SubTitle 2",
                             Title = "Title 2",
@@ -104,7 +104,7 @@ namespace NewsUA.API.Migrations
                             AuthorName = "Author name 3",
                             HotStatus = "Basic",
                             Information = "Information 3",
-                            PublishedAt = new DateTime(2023, 5, 16, 10, 22, 53, 78, DateTimeKind.Local).AddTicks(5921),
+                            PublishedAt = new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3699),
                             Status = "InProcess",
                             SubTitle = "SubTitle 3",
                             Title = "Title 3",
@@ -116,7 +116,7 @@ namespace NewsUA.API.Migrations
                             AuthorName = "Author name 4",
                             HotStatus = "Basic",
                             Information = "Information 4",
-                            PublishedAt = new DateTime(2023, 5, 16, 10, 22, 53, 78, DateTimeKind.Local).AddTicks(5925),
+                            PublishedAt = new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3702),
                             Status = "InProcess",
                             SubTitle = "SubTitle 4",
                             Title = "Title 4",
@@ -128,7 +128,7 @@ namespace NewsUA.API.Migrations
                             AuthorName = "Author name 5",
                             HotStatus = "Basic",
                             Information = "Information 5",
-                            PublishedAt = new DateTime(2023, 5, 16, 10, 22, 53, 78, DateTimeKind.Local).AddTicks(5929),
+                            PublishedAt = new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3706),
                             Status = "InProcess",
                             SubTitle = "SubTitle 5",
                             Title = "Title 5",

@@ -79,11 +79,11 @@ namespace NewsUA.API.Migrations
                 columns: new[] { "Id", "AuthorName", "EdittedAt", "HotStatus", "Information", "PhotoUrl", "PublishedAt", "Status", "SubTitle", "Title", "Type" },
                 values: new object[,]
                 {
-                    { 1, "Author name 1", null, "Basic", "Information 1", null, new DateTime(2023, 5, 16, 10, 22, 53, 78, DateTimeKind.Local).AddTicks(5848), "InProcess", "SubTitle 1", "Title 1", "Entertainment" },
-                    { 2, "Author name 2", null, "Hot", "Information 2", null, new DateTime(2023, 5, 16, 10, 22, 53, 78, DateTimeKind.Local).AddTicks(5917), "InProcess", "SubTitle 2", "Title 2", "Entertainment" },
-                    { 3, "Author name 3", null, "Basic", "Information 3", null, new DateTime(2023, 5, 16, 10, 22, 53, 78, DateTimeKind.Local).AddTicks(5921), "InProcess", "SubTitle 3", "Title 3", "Science" },
-                    { 4, "Author name 4", null, "Basic", "Information 4", null, new DateTime(2023, 5, 16, 10, 22, 53, 78, DateTimeKind.Local).AddTicks(5925), "InProcess", "SubTitle 4", "Title 4", "Sport" },
-                    { 5, "Author name 5", null, "Basic", "Information 5", null, new DateTime(2023, 5, 16, 10, 22, 53, 78, DateTimeKind.Local).AddTicks(5929), "InProcess", "SubTitle 5", "Title 5", "Technology" }
+                    { 1, "Author name 1", null, "Basic", "Information 1", null, new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3632), "InProcess", "SubTitle 1", "Title 1", "Entertainment" },
+                    { 2, "Author name 2", null, "Hot", "Information 2", null, new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3694), "InProcess", "SubTitle 2", "Title 2", "Entertainment" },
+                    { 3, "Author name 3", null, "Basic", "Information 3", null, new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3699), "InProcess", "SubTitle 3", "Title 3", "Science" },
+                    { 4, "Author name 4", null, "Basic", "Information 4", null, new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3702), "InProcess", "SubTitle 4", "Title 4", "Sport" },
+                    { 5, "Author name 5", null, "Basic", "Information 5", null, new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3706), "InProcess", "SubTitle 5", "Title 5", "Technology" }
                 });
 
             migrationBuilder.InsertData(

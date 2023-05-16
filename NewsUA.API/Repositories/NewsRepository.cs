@@ -66,7 +66,7 @@ namespace NewsUA.API.Repositories
             if(news == null) return false;
 
             try {
-                news.Status = HotStatuses.Hot.ToString();
+                news.HotStatus = HotStatuses.Hot.ToString();
 
                 _db.SaveChanges();
 

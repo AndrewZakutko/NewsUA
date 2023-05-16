@@ -17,7 +17,7 @@ namespace NewsUA.API.Controllers
             return _newsRepository.GetAll();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("id={id}")]
         public News GetById(int id){
             return _newsRepository.GetNewsById(id);
         }
@@ -50,6 +50,16 @@ namespace NewsUA.API.Controllers
         [HttpGet("SetToHot/{id}")]
         public bool SetToHotStatusById(int id){
             return _newsRepository.SetToHotStatusById(id);
+        }
+
+        [HttpGet("Hot")]
+        public ICollection<News> GetHotNews(){
+            return _newsRepository.GetHotNews();
+        }
+
+        [HttpGet("type={type}")]
+        public ICollection<News> GetNewsByType(string type){
+            return _newsRepository.GetNewsByType(type);
         }
     }
 }

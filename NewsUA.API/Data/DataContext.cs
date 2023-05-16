@@ -11,10 +11,78 @@ namespace NewsUA.API.Data
         }
 
         public DbSet<News> News { get; set; }
+        public DbSet<NewsType> NewsTypes { get; set; }
+        public DbSet<ProcessStatusType> ProcessStatuses { get; set; }
+        public DbSet<NewsStatus> NewsStatuses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<NewsType>().HasData(
+                new NewsType {
+                    Id = 1,
+                    Value = "World"
+                },
+                new NewsType {
+                    Id = 2,
+                    Value = "Local"
+                },
+                new NewsType {
+                    Id = 3,
+                    Value = "Sport"
+                },
+                new NewsType {
+                    Id = 4,
+                    Value = "Business"
+                },
+                new NewsType {
+                    Id = 5,
+                    Value = "Technology"
+                },
+                new NewsType {
+                    Id = 6,
+                    Value = "Science"
+                },
+                new NewsType{
+                    Id = 7,
+                    Value = "Health"
+                },
+                new NewsType{
+                    Id = 8,
+                    Value = "Entertainment"
+                }
+            );
+
+            modelBuilder.Entity<ProcessStatusType>().HasData(
+                new ProcessStatusType{
+                    Id = 1,
+                    Value = "InProcess"
+                },
+                new ProcessStatusType{
+                    Id = 2,
+                    Value = "Approved"
+                },
+                new ProcessStatusType{
+                    Id = 3,
+                    Value = "Editted"
+                },
+                new ProcessStatusType{
+                    Id = 4,
+                    Value = "Deleted"
+                }
+            );
+
+            modelBuilder.Entity<NewsStatus>().HasData(
+                new NewsStatus{
+                    Id = 1,
+                    Value = "Basic"
+                },
+                new NewsStatus{
+                    Id = 2,
+                    Value = "Hot"
+                }
+            );
 
             modelBuilder.Entity<News>().HasData(
                 new Models.News() 
@@ -25,7 +93,8 @@ namespace NewsUA.API.Data
                     AuthorName = "Author name 1",
                     Information = "Information 1",
                     Status = Statuses.InProcess.ToString(),
-                    HotStatus = HotStatuses.Basic.ToString()
+                    HotStatus = HotStatuses.Basic.ToString(),
+                    Type = Enums.NewsTypes.Entertainment.ToString()
                 },
                 new Models.News() 
                 { 
@@ -35,7 +104,8 @@ namespace NewsUA.API.Data
                     AuthorName = "Author name 2",
                     Information = "Information 2",
                     Status = Statuses.InProcess.ToString(),
-                    HotStatus = HotStatuses.Hot.ToString()
+                    HotStatus = HotStatuses.Hot.ToString(),
+                    Type = Enums.NewsTypes.Entertainment.ToString()
                 },
                 new Models.News() 
                 { 
@@ -45,7 +115,8 @@ namespace NewsUA.API.Data
                     AuthorName = "Author name 3",
                     Information = "Information 3",
                     Status = Statuses.InProcess.ToString(),
-                    HotStatus = HotStatuses.Basic.ToString()
+                    HotStatus = HotStatuses.Basic.ToString(),
+                    Type = Enums.NewsTypes.Science.ToString()
                 },
                 new Models.News() 
                 { 
@@ -55,7 +126,8 @@ namespace NewsUA.API.Data
                     AuthorName = "Author name 4",
                     Information = "Information 4",
                     Status = Statuses.InProcess.ToString(),
-                    HotStatus = HotStatuses.Basic.ToString()
+                    HotStatus = HotStatuses.Basic.ToString(),
+                    Type = Enums.NewsTypes.Sport.ToString()
                 },
                 new Models.News() 
                 { 
@@ -65,7 +137,8 @@ namespace NewsUA.API.Data
                     AuthorName = "Author name 5",
                     Information = "Information 5",
                     Status = Statuses.InProcess.ToString(),
-                    HotStatus = HotStatuses.Basic.ToString()
+                    HotStatus = HotStatuses.Basic.ToString(),
+                    Type = Enums.NewsTypes.Technology.ToString()
                 }
             );
         }

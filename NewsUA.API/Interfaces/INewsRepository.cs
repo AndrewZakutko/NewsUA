@@ -12,5 +12,7 @@ namespace NewsUA.API.Interfaces
         bool SetToApprovedStatusById(int id);
         bool SetToHotStatusById(int id);
         bool SetToBasicStatusById(int id);
+        ICollection<News> GetHotNews();
+        ICollection<News> GetNewsByType(string type);
     }
 }

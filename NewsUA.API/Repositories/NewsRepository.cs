@@ -13,6 +13,16 @@ namespace NewsUA.API.Repositories
             _db = db;
         }
 
+        public ICollection<News> GetHotNews()
+        {
+            return _db.News.Where(x => x.HotStatus == HotStatuses.Hot.ToString()).ToList();
+        }
+
+        public ICollection<News> GetNewsByType(string type)
+        {
+            return _db.News.Where(x => x.Type == type).ToList();
+        }
+
         public bool SetToApprovedStatusById(int id)
         {
             var news = _db.News.Find(id);

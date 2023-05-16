@@ -13,6 +13,7 @@ namespace NewsUA.API.Models
         public string? PhotoUrl { get; set; }
         public string Status { get; set; }
         public string HotStatus { get; set; }
+        public string? Type { get; set; }
         public DateTime PublishedAt { get; set; } = DateTime.Now;
         public DateTime? EdittedAt { get; set; }
     }

@@ -2,6 +2,7 @@ using NewsUA.API.Interfaces;
 using NewsUA.API.Models;
 using NewsUA.API.Data;
 using NewsUA.API.Enums;
+using NewsUA.API.DTOs;
 
 namespace NewsUA.API.Repositories
 {
@@ -13,14 +14,27 @@ namespace NewsUA.API.Repositories
             _db = db;
         }
 
+        public ICollection<News> GetApprovedOrEdittedNews()
+        {
+            return _db.News.Where(x => x.Status == Statuses.Approved.ToString() || x.Status == Statuses.Editted.ToString()).ToList();
+        }
+
         public ICollection<News> GetHotNews()
         {
-            return _db.News.Where(x => x.HotStatus == HotStatuses.Hot.ToString()).ToList();
+            return _db.News.Where(x => x.IsHot).ToList();
+        }
+
+        public ICollection<News> GetInProcessNews()
+        {
+            return _db.News.Where(x => x.Status == Statuses.InProcess.ToString()).ToList();
         }
 
         public ICollection<News> GetNewsByType(string type)
         {
-            return _db.News.Where(x => x.Type == type).ToList();
+            return _db.News
+            .Where(x => x.Type == type && x.Status == Statuses.Approved.ToString() 
+            || x.Type == type && x.Status == Statuses.Editted.ToString())
+            .ToList();
         }
 
         public bool SetToApprovedStatusById(int id)
@@ -48,7 +62,7 @@ namespace NewsUA.API.Repositories
             if(news == null) return false;
 
             try {
-                news.Status = HotStatuses.Basic.ToString();
+                news.IsHot = false;
 
                 _db.SaveChanges();
 
@@ -66,7 +80,7 @@ namespace NewsUA.API.Repositories
             if(news == null) return false;
 
             try {
-                news.HotStatus = HotStatuses.Hot.ToString();
+                news.IsHot = true;
 
                 _db.SaveChanges();
 
@@ -109,21 +123,20 @@ namespace NewsUA.API.Repositories
             }
         }
 
-        bool INewsRepository.EditNewsById(News news)
+        bool INewsRepository.EditNewsById(NewsDto newsDto)
         {
-            var newsFounded = _db.News.Find(news.Id);
+            var newsFounded = _db.News.Find(newsDto.Id);
             
-            if(news == null) return false;
+            if(newsFounded == null) return false;
 
             try{
-                newsFounded.Title = news.Title;
-                newsFounded.SubTitle = news.SubTitle;
-                newsFounded.Information = news.Information;
-                newsFounded.PhotoUrl = news.PhotoUrl;
-                newsFounded.AuthorName = news.AuthorName;
+                newsFounded.Title = newsDto.Title;
+                newsFounded.SubTitle = newsDto.SubTitle;
+                newsFounded.Information = newsDto.Information;
+                newsFounded.AuthorName = newsDto.AuthorName;
                 newsFounded.EdittedAt = DateTime.Now;
                 newsFounded.Status = Statuses.Editted.ToString();
-                newsFounded.HotStatus = news.HotStatus;
+                newsFounded.IsHot = newsDto.IsHot;
 
                 _db.SaveChanges();
 

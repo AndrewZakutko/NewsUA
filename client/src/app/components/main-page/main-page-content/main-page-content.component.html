@@ -1,0 +1,15 @@
+<div class="content">
+    <mat-grid-list cols="7" rowHeight="1000px" gutterSize="0px">
+        <mat-grid-tile> 
+            <app-news-menu (clickTypedNews)="getNewsFromMenu($event)"></app-news-menu>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6">
+            <form class="search-form">
+                <mat-form-field style="width: 375px; margin-right: 5px;">
+                  <input matInput placeholder="Search...">
+                </mat-form-field>
+            </form>
+            <app-news-list [news]="news" [loading]="loading"></app-news-list>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

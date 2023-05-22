@@ -1,0 +1,47 @@
+<div class="content">
+    <form [formGroup]="newsForm" (ngSubmit)="onSubmit()" class="form">
+
+        <h3 style="text-align: center;">CREATE NEW NEWS</h3>
+        
+        <mat-form-field class="form-field">
+            <mat-label>Title</mat-label>
+            <input matInput id="title" type="text" formControlName="title">
+        </mat-form-field>
+        
+        <mat-form-field class="form-field">
+            <mat-label>Sub title</mat-label>
+            <input matInput id="subTitle" type="text" formControlName="subTitle">
+        </mat-form-field>
+    
+        <mat-form-field class="form-field">
+            <mat-label>Author name</mat-label>
+            <input matInput id="authorName" type="text" formControlName="authorName">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Information</mat-label>
+            <textarea matInput id="information" formControlName="information"></textarea>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field">
+            <mat-label>News type</mat-label>
+            <mat-select formControlName="type">
+                <mat-option value="World">World</mat-option>
+                <mat-option value="Local">Local</mat-option>
+                <mat-option value="Sport">Sport</mat-option>
+                <mat-option value="Business">Business</mat-option>
+                <mat-option value="Technology">Technology</mat-option>
+                <mat-option value="Science">Science</mat-option>
+                <mat-option value="Health">Health</mat-option>
+                <mat-option value="Entertainment">Entertainment</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="isHot">Is hot?</mat-checkbox>
+        
+        <div class="buttons">
+            <button routerLink="/" mat-raised-button color="primary" class="btn-form-field">Back</button>
+            <button mat-raised-button color="primary" type="submit" class="btn-form-field">Submit</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,44 @@
+.content {
+    padding: 0 200px;
+}
+
+.content-form {
+    display: flex;
+    justify-content: center;
+    padding: 0 200px;
+    margin-top: 50px;
+
+    .form {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 600px;
+
+        .form-field {
+            display: block;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: right;
+
+            .btn-form-field {
+                display: block;
+
+                &:last-child {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}
+
+table {
+    width: 100%;
+}
+
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}

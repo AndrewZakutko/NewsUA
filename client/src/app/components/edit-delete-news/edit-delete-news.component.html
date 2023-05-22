@@ -1,0 +1,89 @@
+<div class="content">
+  <mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
+  <div *ngIf="!isEditMode && !isLoading">
+    <h1 style="text-align: center; margin-top: 15px;">News</h1>
+    <table mat-table [dataSource]="news" class="mat-elevation-z8">
+      
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Title </th>
+          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="authorName">
+          <th mat-header-cell *matHeaderCellDef> Author name </th>
+          <td mat-cell *matCellDef="let element"> {{element.authorName}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="subTitle">
+          <th mat-header-cell *matHeaderCellDef> Sub Title </th>
+          <td mat-cell *matCellDef="let element"> {{element.subTitle}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isHot">
+          <th mat-header-cell *matHeaderCellDef> Is Hot? </th>
+          <td mat-cell *matCellDef="let element"> {{element.isHot == true ? 'Yes' : 'No'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element"> 
+                <div style="float: right;">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit" (click)="goToEditMode(element)"></mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete" (click)="deleteNewsById(element.id)" style="margin-left: 10px;"></mat-icon>
+                </div>
+            </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="isEditMode" class="content-form">
+  <form [formGroup]="newsForm" (ngSubmit)="onSubmit()" class="form">
+
+    <h3 style="text-align: center;">EDIT NEWS</h3>
+    
+    <mat-form-field class="form-field">
+        <mat-label>Title</mat-label>
+        <input matInput id="title" type="text" formControlName="title" [(ngModel)]="newsToEdit.title">
+    </mat-form-field>
+    
+    <mat-form-field class="form-field">
+        <mat-label>Sub title</mat-label>
+        <input matInput id="subTitle" type="text" formControlName="subTitle" [(ngModel)]="newsToEdit.subTitle">
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+        <mat-label>Author name</mat-label>
+        <input matInput id="authorName" type="text" formControlName="authorName" [(ngModel)]="newsToEdit.authorName">
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+        <mat-label>Information</mat-label>
+        <textarea matInput id="information" formControlName="information" [(ngModel)]="newsToEdit.information"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+        <mat-label>News type</mat-label>
+        <mat-select formControlName="type" [(ngModel)]="newsToEdit.type">
+            <mat-option value="World">World</mat-option>
+            <mat-option value="Local">Local</mat-option>
+            <mat-option value="Sport">Sport</mat-option>
+            <mat-option value="Business">Business</mat-option>
+            <mat-option value="Technology">Technology</mat-option>
+            <mat-option value="Science">Science</mat-option>
+            <mat-option value="Health">Health</mat-option>
+            <mat-option value="Entertainment">Entertainment</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="isHot" [(ngModel)]="newsToEdit.isHot">Is hot?</mat-checkbox>
+    
+    <div class="buttons">
+        <button mat-raised-button color="primary" class="btn-form-field" (click)="unsetEditMode()">Back</button>
+        <button mat-raised-button color="primary" type="submit" class="btn-form-field">Submit</button>
+    </div>
+  </form>
+</div>

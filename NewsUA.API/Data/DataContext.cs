@@ -13,11 +13,24 @@ namespace NewsUA.API.Data
         public DbSet<News> News { get; set; }
         public DbSet<NewsType> NewsTypes { get; set; }
         public DbSet<ProcessStatusType> ProcessStatuses { get; set; }
-        public DbSet<NewsStatus> NewsStatuses { get; set; }
+        public DbSet<TelegramBotSetting> TelegramBotSettings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<TelegramBotSetting>().HasData(
+                new TelegramBotSetting {
+                    Id = 1,
+                    Key = "botApiKey",
+                    Value = "6083733825:AAG3K3fm9JfTpa7ed1JVPJJiie0_KAw23Do"
+                },
+                new TelegramBotSetting {
+                    Id = 2,
+                    Key = "chatId",
+                    Value = "@some_channel_1"
+                }
+            );
 
             modelBuilder.Entity<NewsType>().HasData(
                 new NewsType {
@@ -73,17 +86,6 @@ namespace NewsUA.API.Data
                 }
             );
 
-            modelBuilder.Entity<NewsStatus>().HasData(
-                new NewsStatus{
-                    Id = 1,
-                    Value = "Basic"
-                },
-                new NewsStatus{
-                    Id = 2,
-                    Value = "Hot"
-                }
-            );
-
             modelBuilder.Entity<News>().HasData(
                 new Models.News() 
                 { 
@@ -93,7 +95,7 @@ namespace NewsUA.API.Data
                     AuthorName = "Author name 1",
                     Information = "Information 1",
                     Status = Statuses.InProcess.ToString(),
-                    HotStatus = HotStatuses.Basic.ToString(),
+                    IsHot = false,
                     Type = Enums.NewsTypes.Entertainment.ToString()
                 },
                 new Models.News() 
@@ -104,7 +106,7 @@ namespace NewsUA.API.Data
                     AuthorName = "Author name 2",
                     Information = "Information 2",
                     Status = Statuses.InProcess.ToString(),
-                    HotStatus = HotStatuses.Hot.ToString(),
+                    IsHot = true,
                     Type = Enums.NewsTypes.Entertainment.ToString()
                 },
                 new Models.News() 
@@ -115,7 +117,7 @@ namespace NewsUA.API.Data
                     AuthorName = "Author name 3",
                     Information = "Information 3",
                     Status = Statuses.InProcess.ToString(),
-                    HotStatus = HotStatuses.Basic.ToString(),
+                    IsHot = false,
                     Type = Enums.NewsTypes.Science.ToString()
                 },
                 new Models.News() 
@@ -126,7 +128,7 @@ namespace NewsUA.API.Data
                     AuthorName = "Author name 4",
                     Information = "Information 4",
                     Status = Statuses.InProcess.ToString(),
-                    HotStatus = HotStatuses.Basic.ToString(),
+                    IsHot = true,
                     Type = Enums.NewsTypes.Sport.ToString()
                 },
                 new Models.News() 
@@ -137,7 +139,7 @@ namespace NewsUA.API.Data
                     AuthorName = "Author name 5",
                     Information = "Information 5",
                     Status = Statuses.InProcess.ToString(),
-                    HotStatus = HotStatuses.Basic.ToString(),
+                    IsHot = false,
                     Type = Enums.NewsTypes.Technology.ToString()
                 }
             );

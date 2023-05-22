@@ -12,7 +12,7 @@ using NewsUA.API.Data;
 namespace NewsUA.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230516084835_InitialMigration")]
+    [Migration("20230517121435_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -40,16 +40,12 @@ namespace NewsUA.API.Migrations
                     b.Property<DateTime?>("EdittedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("HotStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Information")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhotoUrl")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsHot")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("PublishedAt")
                         .HasColumnType("datetime2");
@@ -78,9 +74,9 @@ namespace NewsUA.API.Migrations
                         {
                             Id = 1,
                             AuthorName = "Author name 1",
-                            HotStatus = "Basic",
                             Information = "Information 1",
-                            PublishedAt = new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3632),
+                            IsHot = false,
+                            PublishedAt = new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1146),
                             Status = "InProcess",
                             SubTitle = "SubTitle 1",
                             Title = "Title 1",
@@ -90,9 +86,9 @@ namespace NewsUA.API.Migrations
                         {
                             Id = 2,
                             AuthorName = "Author name 2",
-                            HotStatus = "Hot",
                             Information = "Information 2",
-                            PublishedAt = new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3694),
+                            IsHot = true,
+                            PublishedAt = new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1209),
                             Status = "InProcess",
                             SubTitle = "SubTitle 2",
                             Title = "Title 2",
@@ -102,9 +98,9 @@ namespace NewsUA.API.Migrations
                         {
                             Id = 3,
                             AuthorName = "Author name 3",
-                            HotStatus = "Basic",
                             Information = "Information 3",
-                            PublishedAt = new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3699),
+                            IsHot = false,
+                            PublishedAt = new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1212),
                             Status = "InProcess",
                             SubTitle = "SubTitle 3",
                             Title = "Title 3",
@@ -114,9 +110,9 @@ namespace NewsUA.API.Migrations
                         {
                             Id = 4,
                             AuthorName = "Author name 4",
-                            HotStatus = "Basic",
                             Information = "Information 4",
-                            PublishedAt = new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3702),
+                            IsHot = true,
+                            PublishedAt = new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1216),
                             Status = "InProcess",
                             SubTitle = "SubTitle 4",
                             Title = "Title 4",
@@ -126,42 +122,13 @@ namespace NewsUA.API.Migrations
                         {
                             Id = 5,
                             AuthorName = "Author name 5",
-                            HotStatus = "Basic",
                             Information = "Information 5",
-                            PublishedAt = new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3706),
+                            IsHot = false,
+                            PublishedAt = new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1219),
                             Status = "InProcess",
                             SubTitle = "SubTitle 5",
                             Title = "Title 5",
                             Type = "Technology"
-                        });
-                });
-
-            modelBuilder.Entity("NewsUA.API.Models.NewsStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("NewsStatuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Value = "Basic"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Value = "Hot"
                         });
                 });
 
@@ -260,6 +227,41 @@ namespace NewsUA.API.Migrations
                         {
                             Id = 4,
                             Value = "Deleted"
+                        });
+                });
+
+            modelBuilder.Entity("NewsUA.API.Models.TelegramBotSetting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TelegramBotSettings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Key = "botApiKey",
+                            Value = "6083733825:AAG3K3fm9JfTpa7ed1JVPJJiie0_KAw23Do"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Key = "chatId",
+                            Value = "@some_channel_1"
                         });
                 });
 #pragma warning restore 612, 618

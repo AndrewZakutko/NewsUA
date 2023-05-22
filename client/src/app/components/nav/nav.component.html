@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <div>
+    <a href="/" class="logo-text">NewsUA</a>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menu">Admin</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="admin/create">Create news</button>
+      <button mat-menu-item routerLink="admin/table">Edit/Delete news</button>
+      <button mat-menu-item routerLink="admin/approve">News to approve</button>
+      <button mat-menu-item>Telegram bot settings</button>
+    </mat-menu>
+    <a href="https://t.me/some_channel_1" target="_blank" mat-button class="nav-btn">Telegram</a>
+  </div>
+</mat-toolbar>

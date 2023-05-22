@@ -1,0 +1,18 @@
+<div class="hot-news-list">
+    <h1><i>Hot news</i></h1>
+    <mat-card *ngFor="let item of news" class="card">
+        <mat-card-header>
+            <mat-card-title-group>
+                <mat-card-title>{{item.title}}</mat-card-title>
+                <mat-card-subtitle>{{item.subTitle}}</mat-card-subtitle>
+                <img mat-card-md-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"  alt="Image of a Shiba Inu">
+            </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-actions>
+            <button mat-button color="primary">Watch</button>
+        </mat-card-actions>
+        <mat-card-footer class="footer">
+            <p>{{item.publishedAt | date}}</p>
+        </mat-card-footer>
+    </mat-card>
+</div>

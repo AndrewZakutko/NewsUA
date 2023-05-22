@@ -23,9 +23,8 @@ namespace NewsUA.API.Migrations
                     SubTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AuthorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Information = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HotStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsHot = table.Column<bool>(type: "bit", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PublishedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EdittedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -33,19 +32,6 @@ namespace NewsUA.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_News", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NewsStatuses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NewsStatuses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,25 +60,30 @@ namespace NewsUA.API.Migrations
                     table.PrimaryKey("PK_ProcessStatuses", x => x.Id);
                 });
 
-            migrationBuilder.InsertData(
-                table: "News",
-                columns: new[] { "Id", "AuthorName", "EdittedAt", "HotStatus", "Information", "PhotoUrl", "PublishedAt", "Status", "SubTitle", "Title", "Type" },
-                values: new object[,]
+            migrationBuilder.CreateTable(
+                name: "TelegramBotSettings",
+                columns: table => new
                 {
-                    { 1, "Author name 1", null, "Basic", "Information 1", null, new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3632), "InProcess", "SubTitle 1", "Title 1", "Entertainment" },
-                    { 2, "Author name 2", null, "Hot", "Information 2", null, new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3694), "InProcess", "SubTitle 2", "Title 2", "Entertainment" },
-                    { 3, "Author name 3", null, "Basic", "Information 3", null, new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3699), "InProcess", "SubTitle 3", "Title 3", "Science" },
-                    { 4, "Author name 4", null, "Basic", "Information 4", null, new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3702), "InProcess", "SubTitle 4", "Title 4", "Sport" },
-                    { 5, "Author name 5", null, "Basic", "Information 5", null, new DateTime(2023, 5, 16, 10, 48, 35, 545, DateTimeKind.Local).AddTicks(3706), "InProcess", "SubTitle 5", "Title 5", "Technology" }
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Key = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TelegramBotSettings", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
-                table: "NewsStatuses",
-                columns: new[] { "Id", "Value" },
+                table: "News",
+                columns: new[] { "Id", "AuthorName", "EdittedAt", "Information", "IsHot", "PublishedAt", "Status", "SubTitle", "Title", "Type" },
                 values: new object[,]
                 {
-                    { 1, "Basic" },
-                    { 2, "Hot" }
+                    { 1, "Author name 1", null, "Information 1", false, new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1146), "InProcess", "SubTitle 1", "Title 1", "Entertainment" },
+                    { 2, "Author name 2", null, "Information 2", true, new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1209), "InProcess", "SubTitle 2", "Title 2", "Entertainment" },
+                    { 3, "Author name 3", null, "Information 3", false, new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1212), "InProcess", "SubTitle 3", "Title 3", "Science" },
+                    { 4, "Author name 4", null, "Information 4", true, new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1216), "InProcess", "SubTitle 4", "Title 4", "Sport" },
+                    { 5, "Author name 5", null, "Information 5", false, new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1219), "InProcess", "SubTitle 5", "Title 5", "Technology" }
                 });
 
             migrationBuilder.InsertData(
@@ -120,6 +111,15 @@ namespace NewsUA.API.Migrations
                     { 3, "Editted" },
                     { 4, "Deleted" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "TelegramBotSettings",
+                columns: new[] { "Id", "Key", "Value" },
+                values: new object[,]
+                {
+                    { 1, "botApiKey", "6083733825:AAG3K3fm9JfTpa7ed1JVPJJiie0_KAw23Do" },
+                    { 2, "chatId", "@some_channel_1" }
+                });
         }
 
         /// <inheritdoc />
@@ -129,13 +129,13 @@ namespace NewsUA.API.Migrations
                 name: "News");
 
             migrationBuilder.DropTable(
-                name: "NewsStatuses");
-
-            migrationBuilder.DropTable(
                 name: "NewsTypes");
 
             migrationBuilder.DropTable(
                 name: "ProcessStatuses");
+
+            migrationBuilder.DropTable(
+                name: "TelegramBotSettings");
         }
     }
 }

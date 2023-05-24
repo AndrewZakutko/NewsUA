@@ -4,7 +4,7 @@ namespace NewsUA.API.Interfaces
 {
     public interface ITelegramSettingsRepository
     {
-        ICollection<TelegramBotSetting> GetSettings();
-        bool EditSetting(int id);
+        ICollection<TelegramBotSetting> GetAllSettings();
+        bool EditSetting(TelegramBotSetting newTgSetting);
     }
 }

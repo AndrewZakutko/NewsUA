@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditNewsModel, News } from 'src/app/models/news';
 import { NewsService } from 'src/app/services/news.service';
 import { DeleteNewsDialogComponent } from './delete-news-dialog/delete-news-dialog.component';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EditNewsDialogComponent } from './edit-news-dialog/edit-news-dialog.component';
 
 @Component({
@@ -28,13 +28,12 @@ export class EditDeleteNewsComponent implements OnInit {
   isLoading = false;
   newsForm = new FormGroup({
     id: new FormControl(0),
-    title: new FormControl(''),
-    subTitle: new FormControl(''),
-    authorName: new FormControl(''),
-    information: new FormControl(''),
-    status: new FormControl(''),
-    isHot: new FormControl(false),
-    type: new FormControl('')
+    title: new FormControl('', [Validators.required]),
+    subTitle: new FormControl('', [Validators.required]),
+    authorName: new FormControl('', [Validators.required]),
+    information: new FormControl('', [Validators.required]),
+    isHot: new FormControl(false, [Validators.required]),
+    type: new FormControl('', [Validators.required]),
   });
 
   constructor(private newsService: NewsService, public dialog: MatDialog) {
@@ -86,12 +85,29 @@ export class EditDeleteNewsComponent implements OnInit {
 
   unsetEditMode() {
     this.isEditMode = false;
+    
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.getApproveOrEdittedNews();
+      this.isLoading = false;
+    }, 1500)
   }
 
   onSubmit(){
-    this.newsService.edit(this.newsToEdit).subscribe();
-    this.isEditMode = false;
-    this.openEditDialog();
+    if(this.newsForm.valid) {
+      this.newsService.edit(this.newsToEdit).subscribe();
+      this.isEditMode = false;
+
+      this.isLoading = true;
+
+      setTimeout(() => {
+        this.getApproveOrEdittedNews();
+        this.isLoading = false;
+      }, 1500)
+
+      this.openEditDialog();
+    }
   }
 
   openEditDialog() {

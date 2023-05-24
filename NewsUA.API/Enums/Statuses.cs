@@ -4,7 +4,6 @@ namespace NewsUA.API.Enums
     {
         InProcess = 1,
         Approved = 2,
-        Editted = 3,
-        Deleted = 4
+        Editted = 3
     }
 }

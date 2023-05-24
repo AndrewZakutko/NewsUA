@@ -9,8 +9,8 @@ namespace NewsUA.API.Interfaces
         ICollection<News> GetInProcessNews();
         ICollection<News> GetApprovedOrEdittedNews();
         News GetNewsById(int id);
-        bool CreateNews(News news);
-        bool EditNewsById(NewsDto news);
+        bool CreateNews(NewsDto newsDto);
+        bool EditNewsById(NewsDto newsDto);
         bool DeleteNewsById(int id); 
         bool SetToApprovedStatusById(int id);
         bool SetToHotStatusById(int id);

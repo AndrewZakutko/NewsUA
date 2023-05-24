@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NewsService } from 'src/app/services/news.service';
@@ -12,23 +12,19 @@ import { CreateNewsDialogComponent } from './create-news-dialog/create-news-dial
 })
 export class CreateNewsComponent implements OnInit {
   newsForm = new FormGroup({
-    title: new FormControl(''),
-    subTitle: new FormControl(''),
-    authorName: new FormControl(''),
-    information: new FormControl(''),
-    status: new FormControl('InProcess'),
-    isHot: new FormControl(false),
-    type: new FormControl('')
+    title: new FormControl('', [Validators.required]),
+    subTitle: new FormControl('', [Validators.required]),
+    authorName: new FormControl('', [Validators.required]),
+    information: new FormControl('', [Validators.required]),
+    status: new FormControl('InProcess', [Validators.required]),
+    isHot: new FormControl(false, [Validators.required]),
+    type: new FormControl('', [Validators.required]),
   });
 
   constructor(private newsService: NewsService, private router: Router, public dialog: MatDialog) {}
 
   openDialog() {
-    const dialogRef = this.dialog.open(CreateNewsDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    this.dialog.open(CreateNewsDialogComponent);
   }
 
   ngOnInit(): void {
@@ -36,8 +32,10 @@ export class CreateNewsComponent implements OnInit {
   }
 
   onSubmit(){
-    this.newsService.create(this.newsForm.value).subscribe();
-    this.openDialog();
-    this.router.navigateByUrl('/');
+    if(this.newsForm.valid) {
+      this.newsService.create(this.newsForm.value).subscribe();
+      this.openDialog();
+      this.router.navigateByUrl('/');
+    }
   }
 }

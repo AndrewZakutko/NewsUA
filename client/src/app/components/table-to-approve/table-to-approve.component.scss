@@ -7,3 +7,19 @@
     top: 50%;
     left: 50%;
 }
+
+.mat-icon.mat-ligature-font[fontIcon] {
+    transition: 0.5s;
+
+    &:hover {
+        color: green;
+    }
+
+    &.delete-icon {
+        transition: 0.5s;
+
+        &:hover {
+            color: red;
+        }
+    }
+}

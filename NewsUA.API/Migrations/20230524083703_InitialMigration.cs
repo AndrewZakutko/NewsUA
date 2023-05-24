@@ -79,11 +79,11 @@ namespace NewsUA.API.Migrations
                 columns: new[] { "Id", "AuthorName", "EdittedAt", "Information", "IsHot", "PublishedAt", "Status", "SubTitle", "Title", "Type" },
                 values: new object[,]
                 {
-                    { 1, "Author name 1", null, "Information 1", false, new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1146), "InProcess", "SubTitle 1", "Title 1", "Entertainment" },
-                    { 2, "Author name 2", null, "Information 2", true, new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1209), "InProcess", "SubTitle 2", "Title 2", "Entertainment" },
-                    { 3, "Author name 3", null, "Information 3", false, new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1212), "InProcess", "SubTitle 3", "Title 3", "Science" },
-                    { 4, "Author name 4", null, "Information 4", true, new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1216), "InProcess", "SubTitle 4", "Title 4", "Sport" },
-                    { 5, "Author name 5", null, "Information 5", false, new DateTime(2023, 5, 17, 14, 14, 35, 648, DateTimeKind.Local).AddTicks(1219), "InProcess", "SubTitle 5", "Title 5", "Technology" }
+                    { 1, "Author name 1", null, "Information 1", false, new DateTime(2023, 5, 24, 10, 37, 3, 53, DateTimeKind.Local).AddTicks(4479), "InProcess", "SubTitle 1", "Title 1", "Entertainment" },
+                    { 2, "Author name 2", null, "Information 2", true, new DateTime(2023, 5, 24, 10, 37, 3, 53, DateTimeKind.Local).AddTicks(4537), "InProcess", "SubTitle 2", "Title 2", "Entertainment" },
+                    { 3, "Author name 3", null, "Information 3", false, new DateTime(2023, 5, 24, 10, 37, 3, 53, DateTimeKind.Local).AddTicks(4542), "InProcess", "SubTitle 3", "Title 3", "Science" },
+                    { 4, "Author name 4", null, "Information 4", true, new DateTime(2023, 5, 24, 10, 37, 3, 53, DateTimeKind.Local).AddTicks(4545), "InProcess", "SubTitle 4", "Title 4", "Sport" },
+                    { 5, "Author name 5", null, "Information 5", false, new DateTime(2023, 5, 24, 10, 37, 3, 53, DateTimeKind.Local).AddTicks(4549), "InProcess", "SubTitle 5", "Title 5", "Technology" }
                 });
 
             migrationBuilder.InsertData(
@@ -108,8 +108,7 @@ namespace NewsUA.API.Migrations
                 {
                     { 1, "InProcess" },
                     { 2, "Approved" },
-                    { 3, "Editted" },
-                    { 4, "Deleted" }
+                    { 3, "Editted" }
                 });
 
             migrationBuilder.InsertData(

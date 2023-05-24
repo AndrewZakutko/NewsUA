@@ -25,6 +25,13 @@ export class TableToApproveComponent implements OnInit {
 
   approveNews(id: any){
     this.newsService.setToApprovedStatus(id).subscribe();
+
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.getInProcessNews();
+      this.isLoading = false;
+    }, 1500)
   }
 
   getInProcessNews() {

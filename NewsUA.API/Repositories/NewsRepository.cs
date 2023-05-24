@@ -91,12 +91,24 @@ namespace NewsUA.API.Repositories
             }
         }
 
-        bool INewsRepository.CreateNews(News news)
+        bool INewsRepository.CreateNews(NewsDto newsDto)
         {
-            if(news == null) return false;
+            if(newsDto == null) return false;
 
-            try{
-                _db.News.Add(news);
+            try
+            {
+                var newsToAdd = new News()
+                {
+                    Title = newsDto.Title,
+                    SubTitle = newsDto.SubTitle,
+                    AuthorName = newsDto.AuthorName,
+                    Information = newsDto.Information,
+                    Status = newsDto.Status,
+                    IsHot = newsDto.IsHot,
+                    Type = newsDto.Type
+                };
+
+                _db.News.Add(newsToAdd);
                 _db.SaveChanges();
 
                 return true;

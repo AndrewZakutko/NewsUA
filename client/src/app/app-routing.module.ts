@@ -5,6 +5,7 @@ import { MainPageContentComponent } from './components/main-page/main-page-conte
 import { EditDeleteNewsComponent } from './components/edit-delete-news/edit-delete-news.component';
 import { CreateNewsComponent } from './components/create-news/create-news.component';
 import { TableToApproveComponent } from './components/table-to-approve/table-to-approve.component';
+import { TelegramSettingsComponent } from './components/telegram-settings/telegram-settings.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: PathSegments.APPROVE,
     component: TableToApproveComponent
+  },
+  {
+    path: PathSegments.TELEGRAM_SETTINGS,
+    component: TelegramSettingsComponent
   }
 ];
 

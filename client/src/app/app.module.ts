@@ -34,6 +34,9 @@ import { NewsMenuComponent } from './components/main-page/news-menu/news-menu.co
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { EditNewsDialogComponent } from './components/edit-delete-news/edit-news-dialog/edit-news-dialog.component';
 import { TableToApproveComponent } from './components/table-to-approve/table-to-approve.component';
+import { TelegramSettingsComponent } from './components/telegram-settings/telegram-settings.component';
+import { UpdateSuccessDialogComponent } from './components/telegram-settings/update-success-dialog/update-success-dialog.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,9 @@ import { TableToApproveComponent } from './components/table-to-approve/table-to-
     DeleteNewsDialogComponent,
     NewsMenuComponent,
     EditNewsDialogComponent,
-    TableToApproveComponent
+    TableToApproveComponent,
+    TelegramSettingsComponent,
+    UpdateSuccessDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,8 @@ import { TableToApproveComponent } from './components/table-to-approve/table-to-
     ReactiveFormsModule, 
     MatSelectModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxDropzoneModule
   ],
   bootstrap: [AppComponent]
 })

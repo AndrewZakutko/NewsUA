@@ -6,21 +6,33 @@
         <mat-form-field class="form-field">
             <mat-label>Title</mat-label>
             <input matInput id="title" type="text" formControlName="title">
+            <mat-error *ngIf="newsForm.controls.title.hasError('required')">
+                Title is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
         
         <mat-form-field class="form-field">
             <mat-label>Sub title</mat-label>
             <input matInput id="subTitle" type="text" formControlName="subTitle">
+            <mat-error *ngIf="newsForm.controls.subTitle.hasError('required')">
+                Sub title is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
     
         <mat-form-field class="form-field">
             <mat-label>Author name</mat-label>
             <input matInput id="authorName" type="text" formControlName="authorName">
+            <mat-error *ngIf="newsForm.controls.authorName.hasError('required')">
+                Author name is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field class="form-field">
             <mat-label>Information</mat-label>
             <textarea matInput id="information" formControlName="information"></textarea>
+            <mat-error *ngIf="newsForm.controls.information.hasError('required')">
+                Information is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
     
         <mat-form-field class="form-field">
@@ -35,9 +47,12 @@
                 <mat-option value="Health">Health</mat-option>
                 <mat-option value="Entertainment">Entertainment</mat-option>
             </mat-select>
+            <mat-error *ngIf="newsForm.controls.type.hasError('required')">
+                Type of news is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
 
-        <mat-checkbox formControlName="isHot">Is hot?</mat-checkbox>
+        <mat-checkbox formControlName="isHot" style="margin-top: 10px;">Is hot?</mat-checkbox>
         
         <div class="buttons">
             <button routerLink="/" mat-raised-button color="primary" class="btn-form-field">Back</button>

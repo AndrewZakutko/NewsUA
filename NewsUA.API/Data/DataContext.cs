@@ -79,10 +79,6 @@ namespace NewsUA.API.Data
                 new ProcessStatusType{
                     Id = 3,
                     Value = "Editted"
-                },
-                new ProcessStatusType{
-                    Id = 4,
-                    Value = "Deleted"
                 }
             );
 

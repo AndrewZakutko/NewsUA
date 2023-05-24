@@ -39,7 +39,7 @@ namespace NewsUA.API.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult CreateAsync([FromBody]News news){
+        public IActionResult CreateAsync([FromBody]NewsDto news){
             if(_newsRepository.CreateNews(news)){
                 return Ok();
             }

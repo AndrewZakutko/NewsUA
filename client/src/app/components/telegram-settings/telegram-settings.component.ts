@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TelegramSetting } from 'src/app/models/telegramSetting';
 import { TelegramSettingsService } from 'src/app/services/telegram-settings.service';
-import { UpdateSuccessDialogComponent } from './update-success-dialog/update-success-dialog.component';
 
 @Component({
   selector: 'app-telegram-settings',
@@ -28,7 +26,7 @@ export class TelegramSettingsComponent implements OnInit {
   });
 
 
-  constructor(private tgSettingsService: TelegramSettingsService, public dialog: MatDialog) {}
+  constructor(private tgSettingsService: TelegramSettingsService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -68,7 +66,7 @@ export class TelegramSettingsComponent implements OnInit {
 
       this.unsetEditMode();
 
-      this.openDialog();
+      this.openEditTgSettingSnackBar();
     }
   }
 
@@ -78,11 +76,10 @@ export class TelegramSettingsComponent implements OnInit {
     this.isEditMode = true;
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(UpdateSuccessDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+  openEditTgSettingSnackBar() {
+    this.snackBar.open('Telegram setting has been updated', 'OK', {
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
   }
 }

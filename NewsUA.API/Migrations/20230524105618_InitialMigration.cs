@@ -26,7 +26,7 @@ namespace NewsUA.API.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsHot = table.Column<bool>(type: "bit", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PublishedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PublishedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EdittedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -79,11 +79,11 @@ namespace NewsUA.API.Migrations
                 columns: new[] { "Id", "AuthorName", "EdittedAt", "Information", "IsHot", "PublishedAt", "Status", "SubTitle", "Title", "Type" },
                 values: new object[,]
                 {
-                    { 1, "Author name 1", null, "Information 1", false, new DateTime(2023, 5, 24, 10, 37, 3, 53, DateTimeKind.Local).AddTicks(4479), "InProcess", "SubTitle 1", "Title 1", "Entertainment" },
-                    { 2, "Author name 2", null, "Information 2", true, new DateTime(2023, 5, 24, 10, 37, 3, 53, DateTimeKind.Local).AddTicks(4537), "InProcess", "SubTitle 2", "Title 2", "Entertainment" },
-                    { 3, "Author name 3", null, "Information 3", false, new DateTime(2023, 5, 24, 10, 37, 3, 53, DateTimeKind.Local).AddTicks(4542), "InProcess", "SubTitle 3", "Title 3", "Science" },
-                    { 4, "Author name 4", null, "Information 4", true, new DateTime(2023, 5, 24, 10, 37, 3, 53, DateTimeKind.Local).AddTicks(4545), "InProcess", "SubTitle 4", "Title 4", "Sport" },
-                    { 5, "Author name 5", null, "Information 5", false, new DateTime(2023, 5, 24, 10, 37, 3, 53, DateTimeKind.Local).AddTicks(4549), "InProcess", "SubTitle 5", "Title 5", "Technology" }
+                    { 1, "Author name 1", null, "Information 1", false, null, "InProcess", "SubTitle 1", "Title 1", "Entertainment" },
+                    { 2, "Author name 2", null, "Information 2", true, null, "InProcess", "SubTitle 2", "Title 2", "Entertainment" },
+                    { 3, "Author name 3", null, "Information 3", false, null, "InProcess", "SubTitle 3", "Title 3", "Science" },
+                    { 4, "Author name 4", null, "Information 4", true, null, "InProcess", "SubTitle 4", "Title 4", "Sport" },
+                    { 5, "Author name 5", null, "Information 5", false, null, "InProcess", "SubTitle 5", "Title 5", "Technology" }
                 });
 
             migrationBuilder.InsertData(

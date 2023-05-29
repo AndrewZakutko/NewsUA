@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditNewsModel, News } from 'src/app/models/news';
 import { NewsService } from 'src/app/services/news.service';
-import { DeleteNewsDialogComponent } from './delete-news-dialog/delete-news-dialog.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EditNewsDialogComponent } from './edit-news-dialog/edit-news-dialog.component';
+import { NewsType } from 'src/app/models/newsTypes';
+import { NewsTypesService } from 'src/app/services/news-types.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-delete-news',
@@ -35,21 +36,23 @@ export class EditDeleteNewsComponent implements OnInit {
     isHot: new FormControl(false, [Validators.required]),
     type: new FormControl('', [Validators.required]),
   });
+  newsTypes: NewsType[] = [];
 
-  constructor(private newsService: NewsService, public dialog: MatDialog) {
+  constructor(private newsService: NewsService, private newsTypesService: NewsTypesService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.getNewsTypes();
     this.isLoading = true;
 
     setTimeout(() => {
-      this.getApproveOrEdittedNews();
+      this.getAllNews();
       this.isLoading = false;
     }, 1500)
   }
 
-  getApproveOrEdittedNews(){
-    this.newsService.getApprovedOrEdittedNews().subscribe(
+  getAllNews(){
+    this.newsService.getAllNews().subscribe(
       (data: News[]) => {
         this.news = data;
       }
@@ -62,18 +65,17 @@ export class EditDeleteNewsComponent implements OnInit {
     this.isLoading = true;
 
     setTimeout(() => {
-      this.getApproveOrEdittedNews();
+      this.getAllNews();
       this.isLoading = false;
 
-      this.openDeleteDialog();
+      this.openDeletedNewsSnackBar();
     }, 1500)
   }
 
-  openDeleteDialog() {
-    const dialogRef = this.dialog.open(DeleteNewsDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+  openDeletedNewsSnackBar() {
+    this.snackBar.open('News has been deleted', 'OK', {
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
   }
 
@@ -89,7 +91,7 @@ export class EditDeleteNewsComponent implements OnInit {
     this.isLoading = true;
 
     setTimeout(() => {
-      this.getApproveOrEdittedNews();
+      this.getAllNews();
       this.isLoading = false;
     }, 1500)
   }
@@ -102,18 +104,26 @@ export class EditDeleteNewsComponent implements OnInit {
       this.isLoading = true;
 
       setTimeout(() => {
-        this.getApproveOrEdittedNews();
+        this.getAllNews();
         this.isLoading = false;
       }, 1500)
 
-      this.openEditDialog();
+      this.openEditNewsSnackBar();
     }
   }
 
-  openEditDialog() {
-    const dialogRef = this.dialog.open(EditNewsDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+  openEditNewsSnackBar() {
+    this.snackBar.open('News has been updated', 'OK', {
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
+  }
+
+  getNewsTypes() {
+    this.newsTypesService.getAll().subscribe(
+      (data: NewsType[]) => {
+        this.newsTypes = data;
+      }
+    )
   }
 }

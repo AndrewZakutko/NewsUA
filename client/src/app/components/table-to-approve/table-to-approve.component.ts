@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { News } from 'src/app/models/news';
 import { NewsService } from 'src/app/services/news.service';
 
@@ -12,7 +13,7 @@ export class TableToApproveComponent implements OnInit {
   displayedColumns: string[] = ['title', 'authorName', 'subTitle', 'isHot', 'actions'];
   isLoading: boolean = false;
 
-  constructor(private newsService: NewsService) {}
+  constructor(private newsService: NewsService, private snackBar: MatSnackBar) {}
   
   ngOnInit(): void {
     this.isLoading = true;
@@ -30,6 +31,7 @@ export class TableToApproveComponent implements OnInit {
 
     setTimeout(() => {
       this.getInProcessNews();
+      this.openApproveSnackBar();
       this.isLoading = false;
     }, 1500)
   }
@@ -48,7 +50,22 @@ export class TableToApproveComponent implements OnInit {
     this.isLoading = true;
     setTimeout(() => {
       this.getInProcessNews();
+      this.openDeleteSnackBar();
       this.isLoading = false;
     }, 1500)
+  }
+
+  openApproveSnackBar() {
+    this.snackBar.open('News has been approved', 'OK', {
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
+    });
+  }
+
+  openDeleteSnackBar() {
+    this.snackBar.open('News has been deleted', 'OK', {
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
+    });
   }
 }

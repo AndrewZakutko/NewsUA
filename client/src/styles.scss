@@ -1,17 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { 
+    height: 100%;
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.mat-grid-tile {
-    .mat-grid-tile-content {
-        margin-top: 50px;
-        display: block !important;
-        width: 100%;
-    }
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex: 1 1 auto;
 }
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";

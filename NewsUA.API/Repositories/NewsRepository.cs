@@ -9,9 +9,12 @@ namespace NewsUA.API.Repositories
     public class NewsRepository : INewsRepository
     {
         private readonly DataContext _db;
-        public NewsRepository(DataContext db)
+        private readonly IBlobStorageService _blobStorageService;
+
+        public NewsRepository(DataContext db, IBlobStorageService blobStorageService)
         {
             _db = db;
+            _blobStorageService = blobStorageService;
         }
 
         public ICollection<News> GetApprovedOrEdittedNews()
@@ -21,7 +24,8 @@ namespace NewsUA.API.Repositories
 
         public ICollection<News> GetHotNews()
         {
-            return _db.News.Where(x => x.IsHot).ToList();
+            return _db.News.Where(x => x.IsHot && x.Status == Statuses.Approved.ToString()
+                || x.IsHot && x.Status == Statuses.Editted.ToString()).OrderByDescending(x => x.Id).ToList();
         }
 
         public ICollection<News> GetInProcessNews()
@@ -29,13 +33,13 @@ namespace NewsUA.API.Repositories
             return _db.News.Where(x => x.Status == Statuses.InProcess.ToString()).ToList();
         }
 
-        public ICollection<News> GetNewsByType(string type)
+        public ICollection<News> GetPaginationListNews(int pageNumber, int pageSize)
         {
-            return _db.News
-            .Where(x => x.Type == type && x.Status == Statuses.Approved.ToString() 
-            || x.Type == type && x.Status == Statuses.Editted.ToString())
-            .ToList();
-        }
+            var newsList = _db.News.ToList();
+
+            return newsList.Where(x => x.Status == Statuses.Approved.ToString() && x.IsHot == false 
+                || x.Status == Statuses.Editted.ToString() && x.IsHot == false).Skip(pageNumber * pageSize).Take(pageSize).OrderByDescending(x => x.Id).ToList();
+        }   
 
         public bool SetToApprovedStatusById(int id)
         {
@@ -45,6 +49,9 @@ namespace NewsUA.API.Repositories
 
             try {
                 news.Status = Statuses.Approved.ToString();
+                news.PublishedAt = DateTime.Now;
+
+                _blobStorageService.UploadLogFile(news);
 
                 _db.SaveChanges();
 
@@ -135,7 +142,7 @@ namespace NewsUA.API.Repositories
             }
         }
 
-        bool INewsRepository.EditNewsById(NewsDto newsDto)
+        bool INewsRepository.EditNews(NewsDto newsDto)
         {
             var newsFounded = _db.News.Find(newsDto.Id);
             
@@ -149,19 +156,15 @@ namespace NewsUA.API.Repositories
                 newsFounded.EdittedAt = DateTime.Now;
                 newsFounded.Status = Statuses.Editted.ToString();
                 newsFounded.IsHot = newsDto.IsHot;
+                newsFounded.Type = newsDto.Type;
 
                 _db.SaveChanges();
 
                 return true;
             }
             catch{
-                return false;
+                return false;;
             }
-        }
-
-        ICollection<News> INewsRepository.GetAll()
-        {
-            return _db.News.ToList();
         }
 
         News INewsRepository.GetNewsById(int id)

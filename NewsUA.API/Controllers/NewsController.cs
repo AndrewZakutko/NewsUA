@@ -1,26 +1,17 @@
 using NewsUA.API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NewsUA.API.Models;
-using Telegram.Bot.Types;
-using Telegram.Bot;
 using NewsUA.API.DTOs;
 
 namespace NewsUA.API.Controllers
 {
     public class NewsController : BaseApiController
-    {
-        const string CHAT_ID = "@some_channel_1";
-        private CancellationToken _cancellationToken = new();        
-        private readonly Telegram.Bot.TelegramBotClient _tgClient = new Telegram.Bot.TelegramBotClient("6083733825:AAG3K3fm9JfTpa7ed1JVPJJiie0_KAw23Do");
+    {   
+        private string azureFunctionUrl = $"https://telegram-message-sender.azurewebsites.net/api/SendMessage?code=jj4D3A6KwYwT4arp3Avr2aEXHcFsxLE-A0vYIFqbkJbKAzFugp-tdw==";
         private readonly INewsRepository _newsRepository;
         public NewsController(INewsRepository newsRepository)
         {
             _newsRepository = newsRepository;
-        }
-
-        [HttpGet]
-        public ICollection<News> GetAll(){
-            return _newsRepository.GetAll();
         }
 
         [HttpGet("id={id}")]
@@ -61,7 +52,7 @@ namespace NewsUA.API.Controllers
 
         [HttpPut("Edit")]
         public IActionResult Edit(NewsDto newsDto){
-            if(_newsRepository.EditNewsById(newsDto)){
+            if(_newsRepository.EditNews(newsDto)){
                 return Ok();
             }
             else {
@@ -73,7 +64,9 @@ namespace NewsUA.API.Controllers
         public IActionResult SetToApprovedStatusById(int id){
             if(_newsRepository.SetToApprovedStatusById(id)){
                 var news = _newsRepository.GetNewsById(id);
-                SendMessage(news);
+                var mes = GenerateMassageStr(news);
+                System.Net.WebRequest reqGet = System.Net.WebRequest.Create(azureFunctionUrl + $"&message={mes}");
+                System.Net.WebResponse resp = reqGet.GetResponse();
                 return Ok();
             }
             else {
@@ -106,17 +99,10 @@ namespace NewsUA.API.Controllers
             return _newsRepository.GetHotNews();
         }
 
-        [HttpGet("type={type}")]
-        public ICollection<News> GetNewsByType(string type){
-            return _newsRepository.GetNewsByType(type);
-        }
-
-        private async void SendMessage(News news){
-            Message message = await _tgClient.SendTextMessageAsync(
-                    chatId: CHAT_ID,
-                    text: GenerateMassageStr(news),
-                    parseMode: Telegram.Bot.Types.Enums.ParseMode.Html,
-                    cancellationToken: _cancellationToken);
+        [HttpGet("pageNumber={pageNumber}&pageSize={pageSize}")]
+        public ICollection<News> GetPaginationListNews(int pageNumber, int pageSize)
+        {
+            return _newsRepository.GetPaginationListNews(pageNumber, pageSize);
         }
 
         private string GenerateMassageStr(News news){

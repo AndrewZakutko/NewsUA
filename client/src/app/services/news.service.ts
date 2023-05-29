@@ -10,16 +10,8 @@ export class NewsService {
 
   constructor(private http: HttpClient) { }
 
-  getAllNews(){
-    return this.http.get<News[]>(this.apiPath + 'news');
-  }
-
   getHotNews(){
     return this.http.get<News[]>(this.apiPath + 'news/hot');
-  }
-
-  getNewsByType(type: string){
-    return this.http.get<News[]>(this.apiPath + 'news/type=' + type);
   }
 
   deleteNewsById(id: number){
@@ -34,7 +26,7 @@ export class NewsService {
     return this.http.put(this.apiPath + 'news/edit', news);
   }
 
-  getApprovedOrEdittedNews(){
+  getAllNews(){
     return this.http.get<News[]>(this.apiPath + 'news/ApprovedOrEditted');
   }
 
@@ -45,4 +37,8 @@ export class NewsService {
   setToApprovedStatus(id: number) {
     return this.http.get(this.apiPath + `news/SetToApproved/${id}`);
   } 
+
+  getPaginationListNews(pageNumber: number, pageSize: number) {
+    return this.http.get<News[]>(this.apiPath + `news/pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  }
 }

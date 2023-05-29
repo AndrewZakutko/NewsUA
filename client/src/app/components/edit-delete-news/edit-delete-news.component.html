@@ -80,14 +80,7 @@
     <mat-form-field class="form-field">
         <mat-label>News type</mat-label>
         <mat-select formControlName="type" [(ngModel)]="newsToEdit.type">
-            <mat-option value="World">World</mat-option>
-            <mat-option value="Local">Local</mat-option>
-            <mat-option value="Sport">Sport</mat-option>
-            <mat-option value="Business">Business</mat-option>
-            <mat-option value="Technology">Technology</mat-option>
-            <mat-option value="Science">Science</mat-option>
-            <mat-option value="Health">Health</mat-option>
-            <mat-option value="Entertainment">Entertainment</mat-option>
+            <mat-option *ngFor="let newsType of newsTypes" [value]="newsType.value">{{newsType.value}}</mat-option>
         </mat-select>
         <mat-error *ngIf="newsForm.controls.type.hasError('required')">
           Type is <strong>required</strong>

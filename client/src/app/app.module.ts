@@ -28,15 +28,13 @@ import { CreateNewsComponent } from './components/create-news/create-news.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { CreateNewsDialogComponent } from './components/create-news/create-news-dialog/create-news-dialog.component';
-import { DeleteNewsDialogComponent } from './components/edit-delete-news/delete-news-dialog/delete-news-dialog.component';
-import { NewsMenuComponent } from './components/main-page/news-menu/news-menu.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { EditNewsDialogComponent } from './components/edit-delete-news/edit-news-dialog/edit-news-dialog.component';
 import { TableToApproveComponent } from './components/table-to-approve/table-to-approve.component';
 import { TelegramSettingsComponent } from './components/telegram-settings/telegram-settings.component';
-import { UpdateSuccessDialogComponent } from './components/telegram-settings/update-success-dialog/update-success-dialog.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -47,13 +45,9 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     MainPageContentComponent,
     EditDeleteNewsComponent,
     CreateNewsComponent,
-    CreateNewsDialogComponent,
-    DeleteNewsDialogComponent,
-    NewsMenuComponent,
-    EditNewsDialogComponent,
     TableToApproveComponent,
     TelegramSettingsComponent,
-    UpdateSuccessDialogComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +72,9 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     MatSelectModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    MatSnackBarModule,
+    MatPaginatorModule
   ],
   bootstrap: [AppComponent]
 })

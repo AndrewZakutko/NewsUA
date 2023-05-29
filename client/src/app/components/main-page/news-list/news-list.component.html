@@ -1,21 +1,24 @@
-<div style="position: relative; min-height: 275px;">
-    <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
-    <div class="content" *ngIf="!loading">
-        <mat-accordion>
-          <mat-expansion-panel *ngFor="let item of news">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{item.title}}
-              </mat-panel-title>
-              <mat-panel-description>
-                {{item.publishedAt | date}}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <p><b>Sub title:</b> {{item.subTitle}}</p> 
-            <p><b>Author name:</b> {{item.authorName}}</p> 
-            <br>
-            <p><b>Information:</b> {{item.information}}</p> 
-          </mat-expansion-panel>
-        </mat-accordion>
-    </div>
+<div class="news-list">
+  <h5>LATEST NEWS</h5>
+  <mat-divider style="margin-bottom: 10px;"></mat-divider>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let item of news">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{item.title}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{item.publishedAt | date}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p><b>Sub title:</b> {{item.subTitle}}</p> 
+      <p><b>Author name:</b> {{item.authorName}}</p> 
+      <br>
+      <p><b>News type:</b> {{item.type}}</p> 
+      <br>
+      <button mat-stroked-button color="accent">Read more...</button>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-divider style="margin-top: 10px;"></mat-divider>
+  <mat-paginator [length]="news.length" [pageSizeOptions]="[pageSize]" (page)="getPaginationData($event)" aria-label="Select page"></mat-paginator>
 </div>

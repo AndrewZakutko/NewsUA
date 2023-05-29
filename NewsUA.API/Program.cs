@@ -26,6 +26,10 @@ builder.Services.AddCors(opt => opt.AddPolicy("OpenCORSPolicy", builder => {
 var app = builder.Build();
 
 app.UseCors("OpenCORSPolicy");   
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.MapControllers();
 
 app.Run();

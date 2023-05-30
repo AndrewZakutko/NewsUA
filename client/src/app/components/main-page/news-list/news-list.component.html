@@ -20,5 +20,5 @@
     </mat-expansion-panel>
   </mat-accordion>
   <mat-divider style="margin-top: 10px;"></mat-divider>
-  <mat-paginator [length]="news.length" [pageSizeOptions]="[pageSize]" (page)="getPaginationData($event)" aria-label="Select page"></mat-paginator>
+  <mat-paginator [length]="newsCount" [pageSizeOptions]="[pageSize]" (page)="getPaginationData($event)" aria-label="Select page"></mat-paginator>
 </div>

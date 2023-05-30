@@ -113,7 +113,7 @@ namespace NewsUA.API.Controllers
             var text = @"<b>New post!</b>" + '\n' +
                 @$"<b>Title:</b> <i>{news.Title}</i>" + '\n' + '\n' + 
                 @$"<i>{news.SubTitle}</i>" + '\n' + '\n' +
-                @$"Перейдите на <a href='https://www.google.com/'>сайт</a>, чтобы прочесть подробнее" + '\n' +
+                @$"Перейдите на <a href='https://newsua.azurewebsites.net/'>сайт</a>, чтобы прочесть подробнее" + '\n' +
                 @$"<i>{news.PublishedAt}</i>";
 
             return text;

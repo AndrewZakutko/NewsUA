@@ -9,9 +9,13 @@ namespace NewsUA.API.Controllers
     {   
         private string azureFunctionUrl = $"https://telegram-message-sender.azurewebsites.net/api/SendMessage?code=jj4D3A6KwYwT4arp3Avr2aEXHcFsxLE-A0vYIFqbkJbKAzFugp-tdw==";
         private readonly INewsRepository _newsRepository;
-        public NewsController(INewsRepository newsRepository)
+        private string _chatId;
+        private string _botApiKey;
+        public NewsController(INewsRepository newsRepository, ITelegramSettingsRepository telegramSettingsRepository)
         {
             _newsRepository = newsRepository;
+            _chatId = telegramSettingsRepository.GetValueByKey("chatId");
+            _botApiKey = telegramSettingsRepository.GetValueByKey("botApiKey");
         }
 
         [HttpGet("id={id}")]
@@ -65,7 +69,7 @@ namespace NewsUA.API.Controllers
             if(_newsRepository.SetToApprovedStatusById(id)){
                 var news = _newsRepository.GetNewsById(id);
                 var mes = GenerateMassageStr(news);
-                System.Net.WebRequest reqGet = System.Net.WebRequest.Create(azureFunctionUrl + $"&message={mes}");
+                System.Net.WebRequest reqGet = System.Net.WebRequest.Create(azureFunctionUrl + $"&chatId={_chatId}" + $"&botKey={_botApiKey}" + $"&message={mes}");
                 System.Net.WebResponse resp = reqGet.GetResponse();
                 return Ok();
             }

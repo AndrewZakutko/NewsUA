@@ -35,5 +35,12 @@ namespace NewsUA.API.Repositories
         {
             return _db.TelegramBotSettings.ToList();
         }
+
+        public string GetValueByKey(string key)
+        {
+            var value = _db.TelegramBotSettings.Where(x => x.Key == key).FirstOrDefault().Value;
+            if(value == null) return String.Empty;
+            return value;
+        }
     }
 }

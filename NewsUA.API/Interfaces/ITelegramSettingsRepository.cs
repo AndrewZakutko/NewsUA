@@ -6,5 +6,6 @@ namespace NewsUA.API.Interfaces
     {
         ICollection<TelegramBotSetting> GetAllSettings();
         bool EditSetting(TelegramBotSetting newTgSetting);
+        string GetValueByKey(string key);
     }
 }

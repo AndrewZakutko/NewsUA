@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/newsua/databases/newsuadb",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:DbConnection",
+      "dynamicId": null
+    },
+    "storage1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/newsua",
+      "type": "storage.azure",
+      "connectionId": "BlobStorage:BlobConnectionString",
+      "dynamicId": null
+    },
+    "apis1": {
+      "ignored": "true",
+      "type": "apis.azure"
+    }
+  }
+}

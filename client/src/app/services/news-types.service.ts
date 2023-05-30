@@ -6,11 +6,10 @@ import { NewsType } from '../models/newsTypes';
   providedIn: 'root'
 })
 export class NewsTypesService {
-  apiPath = 'https://localhost:5000/'
 
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<NewsType[]>(this.apiPath + "NewsTypes");
+    return this.http.get<NewsType[]>("NewsTypes");
   }
 }

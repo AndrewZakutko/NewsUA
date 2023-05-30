@@ -6,39 +6,38 @@ import { News } from '../models/news';
   providedIn: 'root'
 })
 export class NewsService {
-  apiPath = 'https://localhost:5000/'
 
   constructor(private http: HttpClient) { }
 
   getHotNews(){
-    return this.http.get<News[]>(this.apiPath + 'news/hot');
+    return this.http.get<News[]>('news/hot');
   }
 
   deleteNewsById(id: number){
-    return this.http.delete(this.apiPath + "news/delete/" + id);
+    return this.http.delete("news/delete/" + id);
   }
 
   create(news: {}){
-    return this.http.post(this.apiPath + "news/create", news);
+    return this.http.post("news/create", news);
   }
 
   edit(news: {}){
-    return this.http.put(this.apiPath + 'news/edit', news);
+    return this.http.put('news/edit', news);
   }
 
   getAllNews(){
-    return this.http.get<News[]>(this.apiPath + 'news/ApprovedOrEditted');
+    return this.http.get<News[]>('news/ApprovedOrEditted');
   }
 
   getInProcessNews() {
-    return this.http.get<News[]>(this.apiPath + 'news/InProcess')
+    return this.http.get<News[]>('news/InProcess')
   }
 
   setToApprovedStatus(id: number) {
-    return this.http.get(this.apiPath + `news/SetToApproved/${id}`);
+    return this.http.get(`news/SetToApproved/${id}`);
   } 
 
   getPaginationListNews(pageNumber: number, pageSize: number) {
-    return this.http.get<News[]>(this.apiPath + `news/pageNumber=${pageNumber}&pageSize=${pageSize}`)
+    return this.http.get<News[]>(`news/pageNumber=${pageNumber}&pageSize=${pageSize}`)
   }
 }

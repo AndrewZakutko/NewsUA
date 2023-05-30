@@ -3,6 +3,7 @@ using NewsUA.API.Data;
 using NewsUA.API.Interfaces;
 using NewsUA.API.Repositories;
 using NewsUA.API.Services;
+using Microsoft.Extensions.Azure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,21 @@ builder.Services.AddCors(opt => opt.AddPolicy("OpenCORSPolicy", builder => {
         .AllowAnyMethod()
         .AllowAnyHeader();
 }));
+builder.Services.AddAzureClients(clientBuilder =>
+{
+	clientBuilder.AddBlobServiceClient(builder.Configuration["BlobStorage:BlobConnectionString:blob"], preferMsi: true);
+	clientBuilder.AddQueueServiceClient(builder.Configuration["BlobStorage:BlobConnectionString:queue"], preferMsi: true);
+});
+builder.Services.AddAzureClients(clientBuilder =>
+{
+	clientBuilder.AddBlobServiceClient(builder.Configuration["BlobStorage:BlobConnectionString:blob"], preferMsi: true);
+	clientBuilder.AddQueueServiceClient(builder.Configuration["BlobStorage:BlobConnectionString:queue"], preferMsi: true);
+});
+builder.Services.AddAzureClients(clientBuilder =>
+{
+	clientBuilder.AddBlobServiceClient(builder.Configuration["BlobStorage:BlobConnectionString:blob"], preferMsi: true);
+	clientBuilder.AddQueueServiceClient(builder.Configuration["BlobStorage:BlobConnectionString:queue"], preferMsi: true);
+});
 
 var app = builder.Build();
 

@@ -19,7 +19,7 @@ namespace NewsUA.API.Repositories
 
         public ICollection<News> GetApprovedOrEdittedNews()
         {
-            return _db.News.Where(x => x.Status == Statuses.Approved.ToString() || x.Status == Statuses.Editted.ToString()).ToList();
+            return _db.News.Where(x => x.Status == Statuses.Approved.ToString() || x.Status == Statuses.Editted.ToString()).OrderByDescending(x => x.Id).ToList();
         }
 
         public ICollection<News> GetHotNews()

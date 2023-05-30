@@ -70,7 +70,7 @@ namespace NewsUA.API.Controllers
                 var news = _newsRepository.GetNewsById(id);
                 var mes = GenerateMassageStr(news);
                 System.Net.WebRequest reqGet = System.Net.WebRequest.Create(azureFunctionUrl + $"&chatId={_chatId}" + $"&botKey={_botApiKey}" + $"&message={mes}");
-                System.Net.WebResponse resp = reqGet.GetResponse();
+                reqGet.GetResponse();
                 return Ok();
             }
             else {

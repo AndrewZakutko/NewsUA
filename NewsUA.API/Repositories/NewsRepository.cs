@@ -37,8 +37,11 @@ namespace NewsUA.API.Repositories
         {
             var newsList = _db.News.ToList();
 
-            return newsList.Where(x => x.Status == Statuses.Approved.ToString() && x.IsHot == false 
-                || x.Status == Statuses.Editted.ToString() && x.IsHot == false).Skip(pageNumber * pageSize).Take(pageSize).OrderByDescending(x => x.Id).ToList();
+            newsList = newsList.OrderByDescending(x => x.Id).ToList();
+
+
+			return newsList.Where(x => x.Status == Statuses.Approved.ToString() && x.IsHot == false 
+                || x.Status == Statuses.Editted.ToString() && x.IsHot == false).Skip(pageNumber * pageSize).Take(pageSize).ToList();
         }   
 
         public bool SetToApprovedStatusById(int id)
